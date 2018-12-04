@@ -1,5 +1,5 @@
 # onDutySchedulle.js
-onDutySchedulle is a cronJob wrap for onDutyJs, base on pm2.
+onDutySchedulle is a cronJob wrap for [onDutyJs](https://github.com/PhantasWeng/onDuty.js), base on pm2.
 
 
 ### Install
