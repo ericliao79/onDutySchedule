@@ -1,14 +1,14 @@
 {
-  "name": "onDutySchedulle",
+  "name": "onDutySchedule",
   "version": "1.0.0",
-  "description": "onDuty with schedulle and auto punch",
+  "description": "onDuty with schedule and auto punch",
   "author": "Phantasweng <bensonuong@gmail.com>",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "preinstall": "npm install pm2",
-    "start": "pm2 start index.js --name onDutySchedulle",
-    "stop": "pm2 delete onDutySchedulle"
+    "start": "pm2 start index.js --name onDutySchedule",
+    "stop": "pm2 delete onDutySchedule"
   },
   "dependencies": {
     "node-schedule": "^1.3.1",
