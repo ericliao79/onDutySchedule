@@ -9,6 +9,11 @@ const dateNow = dateFns.format(Date.now(),  'YYYY-MM-DD HH:mm:ss')
 const workDay = process.env.workDay ? process.env.workDay : '1-5'
 const punchTime = process.env.punchTime ? process.env.punchTime : '10,19'
 
+if (!process.env.userName) console.log(`\n🚧  Please set your ${colors.green('userName')} in .env first.`)
+if (!process.env.password) console.log(`\n🚧  Please set your ${colors.green('password')} in .env first.`)
+if (!process.env.loginUrl) console.log(`\n🚧  Please set your ${colors.green('loginUrl')} in .env first.`)
+if (!process.env.userName || !process.env.password || !process.env.loginUrl) process.exit()
+
 onDutyJs.config({
   'userName': process.env.userName,
   'password': process.env.password,
