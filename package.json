@@ -6,7 +6,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "preinstall": "npm install pm2; mkdir screenshot",
+    "preinstall": "npm install pm2; mkdir screenshots",
     "start": "pm2 start index.js --name onDutySchedule",
     "stop": "pm2 delete onDutySchedule"
   },
