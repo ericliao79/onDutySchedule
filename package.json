@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "node-schedule": "^1.3.1",
+    "node-telegram-bot-api": "^0.30.0",
     "onDutyJs": "https://github.com/PhantasWeng/onDuty.js.git",
     "pm2": "^3.2.2"
   }
