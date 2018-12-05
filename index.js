@@ -14,7 +14,7 @@ if (process.env.userID && process.env.userID.length > 0) {
   const bot = require('./telegramBot.js');
   // bot.botAlert('msg')
   // bot.botSuccess('msg')
-  bot.botSuccess('OnDutySchedule START.')
+  bot.botSuccess('OnDutySchedule START. @' +  dateNow)
 }
 
 if (!process.env.userName) console.log(`\n🚧  Please set your ${colors.green('userName')} in .env first.`)
