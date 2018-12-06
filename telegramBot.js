@@ -36,7 +36,7 @@ bot.onText(/\/help/, function (msg, match) {
   var chatId = msg.chat.id;
   var resp = '' +
   '⚡️ <code>/start</code> - Start message.\n' +
-  '⚡️ <code>/log</code>: <strong>' + logStatus + '</strong> - Return output log.\n' +
+  '⚡️ <code>/log</code>: <strong>' + (logStatus ? 'ON' : 'OFF') + '</strong> - Return output log.\n' +
   '⚡️ <code>/help</code> - List all commands.\n' +
   '⚡️ <code>/myid</code> - echo your chatID.\n' +
   '⚡️ <code>/echo [msg]</code> - echo your [msg].';
