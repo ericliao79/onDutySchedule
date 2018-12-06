@@ -9,8 +9,8 @@ const dateNow = dateFns.format(Date.now(),  'YYYY-MM-DD HH:mm:ss')
 const workDay = process.env.workDay ? process.env.workDay : '1-5'
 const punchTime = process.env.punchTime ? process.env.punchTime : '10,19'
 
-const randomStart = 15
-const randomEnd = 1
+const randomMax = process.env.randomMax ? process.env.randomMax : 15
+const randomMin = process.env.randomMin ? process.env.randomMin : 1
 // telegramBot
 if (process.env.userID && process.env.userID.length > 0) {
   var bot = require('./telegramBot.js');
@@ -47,5 +47,5 @@ var j = schedule.scheduleJob('0 0 ' + punchTime + ' * * ' + workDay, function(){
       })
       console.log(colors.green(res.msg + ' @' + res.time))
     })
-  }, Math.round(Math.random() * (randomStart - randomEnd) + 1) * 1000 * 60);
+  }, Math.round(Math.random() * (randomMax - randomMin) + randomMin) * 1000 * 60);
 });
