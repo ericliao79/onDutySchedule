@@ -6,8 +6,9 @@ const token = process.env.appToken
 const userID = process.env.userID
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
+const fs = require('fs')
 
-let logStatus = false
+let logStatus = true
 
 if (process.env.logPath) {
   var { spawn } = require('child_process');
@@ -21,7 +22,9 @@ bot.onText(/\/start/, function (msg, match) {
   // 'match' is the result of executing the regexp above on the text content
   // of the message
   var chatId = msg.chat.id; //用戶的ID
-  var resp = '✨ Hi, I am 👊🏻 Puncher. Your chatID is <code>' + chatId + '</code>'; //括號裡面的為回應內容，可以隨意更改
+  var resp =
+            '✨ Hi, I am 👊🏻 Puncher. Your chatID is <code>' + chatId + '</code>. \n' +
+            '⚡️ Enter <code>/help</code> to list all commands.'
   bot.sendMessage(chatId, resp, {parse_mode: 'HTML'}); //發送訊息的function
 });
 
@@ -51,13 +54,27 @@ bot.onText(/\/myid/, (msg, match) => {
 
 bot.onText(/\/log (.+)/, (msg, match) => {
   const chatId = msg.chat.id;
-  let resp = ''
+  var resp = ''
   switch (match[1]) {
     case 'on':
       logStatus = true
+      resp = '✨ Log has been turn <code>ON</code>'
+      bot.sendMessage(chatId, resp, {parse_mode: 'HTML'})
       break
     case 'off':
       logStatus = false
+      resp = '✨ Log has been turn <code>OFF</code>'
+      bot.sendMessage(chatId, resp, {parse_mode: 'HTML'})
+      break
+    case 'clear':
+      fs.writeFile(process.env.logPath + 'onDutySchedule-error.log', '', function () {
+        resp = '<strong>CLEAR</strong> - onDutySchedule-error.log'
+        bot.sendMessage(chatId, resp, {parse_mode: 'HTML'})
+      })
+      fs.writeFile(process.env.logPath + 'onDutySchedule-out.log', '', function () {
+        resp = '<strong>CLEAR</strong> - onDutySchedule-out.log'
+        bot.sendMessage(chatId, resp, {parse_mode: 'HTML'})
+      })
       break
   }
   // const chatId = msg.chat.id;
@@ -65,24 +82,24 @@ bot.onText(/\/log (.+)/, (msg, match) => {
   // bot.sendMessage(chatId, resp, {parse_mode: 'HTML'});
 });
 
-bot.onText(/\/log/, (msg, match) => {
+bot.onText(/\/log$/, (msg, match) => {
   const chatId = msg.chat.id;
   const resp = '' +
-    '<pre>OPTION: on / of </pre>\n\n' +
-    '<strong>LOG STATUS:</strong> <code>' + logStatus + '</code>'
+    '⚡️ <pre>/log [on, off] </pre>\n\n' +
+    '✨ Log status: <code>' + (logStatus ? 'ON' : 'OFF') + '</code>'
     ''
   bot.sendMessage(chatId, resp, {parse_mode: 'HTML'});
 })
 
 tailOut.stdout.on("data", function (data) {
-  const resp = `✨ <strong>onDutySchedule-out.log</strong>✨ \n\n<pre>${data.toString()}</pre>`
+  const resp = `✨ <strong>onDutySchedule-out.log</strong>\n<pre>${data.toString()}</pre>\n`
   if (logStatus) {
     bot.sendMessage(userID, resp, {parse_mode: 'HTML'});
   }
 });
 
 tailError.stdout.on("data", function (data) {
-  const resp = `✨ <strong>onDutySchedule-error.log</strong>✨ \n\n<pre>${data.toString()}</pre>`
+  const resp = `🚨 <strong>onDutySchedule-error.log</strong>\n<pre>${data.toString()}</pre>\n`
   if (logStatus) {
     bot.sendMessage(userID, resp, {parse_mode: 'HTML'});
   }
