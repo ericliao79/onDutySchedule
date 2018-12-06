@@ -85,7 +85,7 @@ bot.onText(/\/log (.+)/, (msg, match) => {
 bot.onText(/\/log$/, (msg, match) => {
   const chatId = msg.chat.id;
   const resp = '' +
-    '⚡️ <pre>/log [on, off] </pre>\n\n' +
+    '⚡️ <pre>/log [on, off, clear] </pre>\n\n' +
     '✨ Log status: <code>' + (logStatus ? 'ON' : 'OFF') + '</code>'
     ''
   bot.sendMessage(chatId, resp, {parse_mode: 'HTML'});
