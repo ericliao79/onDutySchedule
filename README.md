@@ -12,10 +12,10 @@ onDutySchedulle is a cronJob wrap for [onDutyJs](https://github.com/PhantasWeng/
   - You can also set timer option
     - default workDay: 1-5
     - default punchTime: 10,19
-  - Create a bot on telegram. [@botfather] (https://telegram.me/BotFather)
-    - Add your bot token into .env
-    - Add you userID INTO .env
-    
+  - Create a bot on telegram. [@botfather](https://telegram.me/BotFather)
+    - Add your bot appToken into .env
+    - Add you userID into .env
+
 ### Run
 For NPM:
 Command: `npm run start` `npm run stop` or enter command `npm run` to list all options.
