@@ -1549,8 +1549,8 @@ object.pick@^1.3.0:
     isobject "^3.0.1"
 
 "onDutyJs@https://github.com/PhantasWeng/onDuty.js.git":
-  version "1.3.0"
-  resolved "https://github.com/PhantasWeng/onDuty.js.git#470fe50d062f824268d4b14f5d9e7141a8ee64d2"
+  version "1.3.1"
+  resolved "https://github.com/PhantasWeng/onDuty.js.git#8fcc9885fd05f504a9af53ed8cf92d914357f4c9"
   dependencies:
     colors "^1.3.2"
     commander "^2.19.0"

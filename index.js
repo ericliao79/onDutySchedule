@@ -11,7 +11,7 @@ const punchTime = process.env.punchTime ? process.env.punchTime : '10,19'
 
 // telegramBot
 if (process.env.userID && process.env.userID.length > 0) {
-  const bot = require('./telegramBot.js');
+  var bot = require('./telegramBot.js');
   // bot.botAlert('msg')
   // bot.botSuccess('msg')
   bot.botSuccess('OnDutySchedule START. @' +  dateNow)
@@ -31,10 +31,12 @@ onDutyJs.config({
 var j = schedule.scheduleJob('0 0 ' + punchTime + ' * * ' + workDay, function(){
   setTimeout(async () => {
     await onDutyJs.start().then(res => {
-      if (res.status) {
-        bot.botSuccess(res.msg + ' @' + res.time)
-      } else {
-        bot.botAlert(res.msg + ' @' + res.time)
+      if (process.env.userID && process.env.userID.length > 0) {
+        if (res.status) {
+          bot.botSuccess(res.msg + ' @' + res.time)
+        } else {
+          bot.botAlert(res.msg + ' @' + res.time)
+        }
       }
       fs.appendFile('./onDutyJs.log', res.msg + ' @' + res.time + '\r\n', function (err) {
         if (err) {
