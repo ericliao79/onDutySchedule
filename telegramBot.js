@@ -91,19 +91,21 @@ bot.onText(/\/log$/, (msg, match) => {
   bot.sendMessage(chatId, resp, {parse_mode: 'HTML'});
 })
 
-tailOut.stdout.on("data", function (data) {
-  const resp = `✨ <strong>onDutySchedule-out.log</strong>\n<pre>${data.toString()}</pre>\n`
-  if (logStatus) {
-    bot.sendMessage(userID, resp, {parse_mode: 'HTML'});
-  }
-});
+if (process.env.logPath) {
+  tailOut.stdout.on("data", function (data) {
+    const resp = `✨ <strong>onDutySchedule-out.log</strong>\n<pre>${data.toString()}</pre>\n`
+    if (logStatus) {
+      bot.sendMessage(userID, resp, {parse_mode: 'HTML'});
+    }
+  });
 
-tailError.stdout.on("data", function (data) {
-  const resp = `🚨 <strong>onDutySchedule-error.log</strong>\n<pre>${data.toString()}</pre>\n`
-  if (logStatus) {
-    bot.sendMessage(userID, resp, {parse_mode: 'HTML'});
-  }
-});
+  tailError.stdout.on("data", function (data) {
+    const resp = `🚨 <strong>onDutySchedule-error.log</strong>\n<pre>${data.toString()}</pre>\n`
+    if (logStatus) {
+      bot.sendMessage(userID, resp, {parse_mode: 'HTML'});
+    }
+  });
+}
 
 // echo [msg]
 bot.onText(/\/echo (.+)/, (msg, match) => {
