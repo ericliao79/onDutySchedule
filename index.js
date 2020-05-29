@@ -47,5 +47,5 @@ var j = schedule.scheduleJob('0 0 ' + punchTime + ' * * ' + workDay, function(){
       })
       console.log(colors.green(res.msg + ' @' + res.time))
     })
-  }, Math.round(Math.random() * (randomMax - randomMin) + randomMin) * 1000 * 60);
+  }, Math.floor(Math.random() * (randomMax - randomMin)) + randomMin * 1000 * 60);
 });
