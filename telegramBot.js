@@ -16,6 +16,11 @@ if (process.env.logPath) {
   var tailError = spawn('tail', ["-f"].concat(process.env.logPath + 'onDutySchedule-error.log'));
 }
 
+
+// Clear Logs
+fs.writeFile(process.env.logPath + 'onDutySchedule-error.log', '', () => {})
+fs.writeFile(process.env.logPath + 'onDutySchedule-out.log', '', () => {})
+
 // start
 bot.onText(/\/start/, function (msg, match) {
   // 'msg' is the received Message from Telegram
@@ -38,8 +43,12 @@ bot.onText(/\/help/, function (msg, match) {
   '⚡️ <code>/start</code> - Start message.\n' +
   '⚡️ <code>/log</code>: <strong>' + (logStatus ? 'ON' : 'OFF') + '</strong> - Return output log.\n' +
   '⚡️ <code>/help</code> - List all commands.\n' +
-  '⚡️ <code>/myid</code> - echo your chatID.\n' +
-  '⚡️ <code>/echo [msg]</code> - echo your [msg].';
+  '⚡️ <code>/myid</code> - Echo your chatID.\n' +
+  '⚡️ <code>/echo [msg]</code> - Echo your [msg]\n' +
+  '⚡️ <code>/status [msg]</code> - Schedule Status\n' +
+  '⚡️ <code>/on [msg]</code> - Turn on schedule\n' +
+  '⚡️ <code>/off [msg]</code> - Turn off schedule\n' +
+  '⚡️ <code>/punch [msg]</code> - Take a single punch.';
   bot.sendMessage(chatId, resp, {parse_mode: 'HTML'}); //發送訊息的function
 });
 
